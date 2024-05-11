@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.parent.entity.Employee;
+import com.parent.dtos.EmployeeRequest;
+import com.parent.dtos.EmployeeResponse;
 import com.parent.service.EmployeeService;
 
 @RestController 
@@ -24,23 +25,23 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	
 	@PostMapping("/create")
-	Employee createEmployee(@RequestBody  Employee employee) {
-		return employeeService.createEmployee(employee);
+	EmployeeResponse createEmployee(@RequestBody  EmployeeRequest employeeDto) {
+		return employeeService.createEmployee(employeeDto);
 	}
 	
 	@GetMapping("/getById")
-	Employee getEmployeeById(@RequestParam int employeeId) {
+	EmployeeResponse getEmployeeById(@RequestParam int employeeId) {
 		return employeeService.getEmployeeById(employeeId);
 	}
 	
 	@GetMapping("/getAll")
-	List<Employee> getAllEmployee(){
+	List<EmployeeResponse> getAllEmployee(){
 		return employeeService.getAllEmployee();
 	}
 	
-	@PutMapping("/update")
-	Employee updateEmployee(@RequestBody Employee employee) {
-		return employeeService.updateEmployee(employee);
+	@PutMapping("/update/{employeeId}")
+	EmployeeResponse updateEmployee(@PathVariable("employeeId") int employeeId, @RequestBody EmployeeRequest employee) {
+		return employeeService.updateEmployee(employeeId, employee);
 	}
 	
 	@DeleteMapping("/delete/{employeeId}")
@@ -49,7 +50,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/getByName")
-	Employee getEmployeeByName(@RequestParam String employeeName) {
+	EmployeeResponse getEmployeeByName(@RequestParam String employeeName) {
 		return employeeService.getEmployeeByName(employeeName);
 	}
 }

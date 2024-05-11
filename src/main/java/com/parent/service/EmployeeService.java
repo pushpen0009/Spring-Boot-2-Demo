@@ -2,20 +2,21 @@ package com.parent.service;
 
 import java.util.List;
 
-import com.parent.entity.Employee;
+import com.parent.dtos.EmployeeRequest;
+import com.parent.dtos.EmployeeResponse;
 
 public interface EmployeeService {
 
-	public Employee createEmployee(Employee employee);
+	public EmployeeResponse createEmployee(EmployeeRequest employeeRequest);
 	
-	public Employee getEmployeeById(int employeeId);
+	public EmployeeResponse getEmployeeById(int employeeId);
 	
-	public List<Employee> getAllEmployee();
+	public List<EmployeeResponse> getAllEmployee();
 	
-	public Employee updateEmployee(Employee employee);
+	public EmployeeResponse updateEmployee(int employeeId, EmployeeRequest employeeRequest);
 	
 	public String deleteEmployee(int employeeId);
 
-	public Employee getEmployeeByName(String employeeName);
+	public EmployeeResponse getEmployeeByName(String employeeName);
 }
 
